@@ -1,11 +1,12 @@
 // notes.cpp : Defines the entry point for the console application.
 //
 
+#include <fstream>
 #include <iostream>
-#include <string>
+#include <memory>
 #include <sstream>
+#include <string>
 
-#include "boost/filesystem.hpp"
 #include "boost/program_options.hpp"
 
 #define TAGLIB_STATIC
