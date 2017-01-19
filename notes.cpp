@@ -1,6 +1,7 @@
 // notes.cpp : Defines the entry point for the console application.
 //
 
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <memory>
@@ -322,10 +323,6 @@ main(
    int argc, 
    char* argv[])
 {
-   // std::cout << "got " << argc << " args" << std::endl;
-   // std::copy( argv + 1, argv + argc, std::ostream_iterator<char*>( std::cout, " " ) );
-   // std::cout << std::endl;
-
    program_options::variables_map vm;
 
    ParseCommandLine(argc, argv, vm);
@@ -333,7 +330,7 @@ main(
    if (vm.count("input-file") == 0)
    {
       std::cerr << "No input file specified!\n";
-      return 0;
+      return EXIT_FAILURE;
    }
 
    const std::string& inputPath = vm["input-file"].as< string >();
@@ -358,7 +355,7 @@ main(
    if ( !file )
    {
       std::cerr << "Unable to open or determine file type!\n";
-      return 0;
+      return EXIT_FAILURE;
    }
 
    if ( vm.count( "title" ) )
@@ -411,6 +408,7 @@ main(
          return 0;
       }
 
+      // Copy image data into a string. Not sure why I used a string for storage.
       std::string content( 
          (std::istreambuf_iterator<char>( ifs )),
          (std::istreambuf_iterator<char>()) );
@@ -420,7 +418,7 @@ main(
 
    file->Write();
 
-   return 0;
+   return EXIT_SUCCESS;
 }
 
 //------------------------------------------------------------------------------
@@ -468,7 +466,8 @@ ParseCommandLine(
       cerr << e.what();
    }
 
-   if (vm.count("help")) {
+   if (vm.count("help")) 
+   {
       cout << desc << "\n";
       return 1;
    }
