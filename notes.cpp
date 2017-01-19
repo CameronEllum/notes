@@ -24,10 +24,30 @@
 #ifdef _DEBUG
 #  pragma comment(lib, "taglib/Debug/libtag.a")
 #else
-#  pragma comment(lib, "taglib/Release/libtag.a")
+#  pragma comment(lib, "taglib/lib/tag.lib")
 #endif
 
-// cmake -G"Visual Studio 12 2013" -DCMAKE_INSTALL_PREFIX=C:\Libraries\taglib -DENABLE_STATIC=ON -DENABLE_STATIC_RUNTIME=ON
+/*
+
+Requires taglib.
+
+1. Add as a subfolder:
+
+git submodule add https://github.com/taglib/taglib
+
+2. Build
+
+mkdir build
+cd build
+cmake -G"Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX=..\ -DBUILD_SHARED_LIBS=OFF ..\
+
+3. Build
+
+Open MSVC solution and build Release. Then, build INSTALL project
+
+
+
+ */
 
 /*
 
