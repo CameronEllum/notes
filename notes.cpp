@@ -11,15 +11,15 @@
 #include "boost/program_options.hpp"
 
 #define TAGLIB_STATIC
-#include "taglib\taglib.h"
-#include "taglib\mpegfile.h"
-#include "taglib\attachedpictureframe.h"
-#include "taglib\textidentificationframe.h"
-#include "taglib\id3v1tag.h"
-#include "taglib\id3v2tag.h"
-#include "taglib\mp4file.h"
-#include "taglib\mp4tag.h"
-#include "taglib\mp4coverart.h"
+#include "taglib/taglib.h"
+#include "taglib/mpegfile.h"
+#include "taglib/attachedpictureframe.h"
+#include "taglib/textidentificationframe.h"
+#include "taglib/id3v1tag.h"
+#include "taglib/id3v2tag.h"
+#include "taglib/mp4file.h"
+#include "taglib/mp4tag.h"
+#include "taglib/mp4coverart.h"
 
 #ifdef _DEBUG
 #  pragma comment(lib, "taglib/Debug/libtag.a")
@@ -130,11 +130,13 @@ public:
    {
       stringstream ss;
       ss << track;
-      if ( total != -1 )
+      if ( total > 0 )
          ss << "/" << total;
 
       auto frame = new TagLib::ID3v2::TextIdentificationFrame( "TRCK", TagLib::String::Latin1 );
       frame->setText( ss.str().c_str() );
+
+      // "tag takes ownership of the frame and will handle freeing its memory"
       file_->ID3v2Tag( true )->addFrame( frame );
    }
 
