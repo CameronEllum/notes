@@ -5,7 +5,8 @@ Tags MP3 and AAC files
 
 Help:
 
-Allowed options:
+  Allowed options:
+```
   --help                    produce help message
   -s [ --strip ]            Strip existing tags
   -t [ --title ] arg        Title
@@ -19,4 +20,4 @@ Allowed options:
   -r [ --album-artist ] arg Album artist
   --art arg                 Art (cover)
   -i [ --input-file ] arg   Input file
-
+```
